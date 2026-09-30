@@ -9,7 +9,8 @@ async function request(path, { method = 'GET', body } = {}) {
   if (token) headers.Authorization = `Bearer ${token}`;
   let res;
   try {
-    res = await fetch(`/api${path}`, { method, headers, body: body ? JSON.stringify(body) : undefined });
+    const API_BASE_URL = import.meta.env.VITE_API_URL || '';
+res = await fetch(`${API_BASE_URL}/api${path}`, { method, headers, body: body ? JSON.stringify(body) : undefined });
   } catch {
     throw new Error('Cannot reach the server. Check that the backend is running.');
   }
